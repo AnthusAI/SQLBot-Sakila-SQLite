@@ -99,8 +99,9 @@ Create or modify `.sqlbot/config.yml` to customize SQLBot behavior:
 # Example configuration
 llm:
   model: "gpt-5"
-  temperature: 0.1
   max_tokens: 50000
+  verbosity: "low"  # low, medium, high
+  effort: "minimal"  # minimal, balanced, thorough
 
 database:
   profile: "Sakila"

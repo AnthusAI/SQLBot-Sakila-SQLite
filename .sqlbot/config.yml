@@ -3,8 +3,9 @@
 # LLM Configuration
 llm:
   model: "gpt-5"  # SQLBot uses GPT-5 for advanced reasoning
-  temperature: 0.1  # Low temperature for consistent, factual responses
   max_tokens: 50000  # High token limit for complex database analysis
+  verbosity: "low"  # Response verbosity: low, medium, high
+  effort: "minimal"  # Processing effort: minimal, balanced, thorough
   
 # Database Configuration  
 database:
