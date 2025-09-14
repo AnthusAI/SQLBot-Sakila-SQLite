@@ -98,9 +98,9 @@ Create or modify `.sqlbot/config.yml` to customize SQLBot behavior:
 ```yaml
 # Example configuration
 llm:
-  model: "gpt-4"
+  model: "gpt-5"
   temperature: 0.1
-  max_tokens: 4000
+  max_tokens: 50000
 
 database:
   profile: "Sakila"

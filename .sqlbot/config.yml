@@ -2,9 +2,9 @@
 
 # LLM Configuration
 llm:
-  model: "gpt-4"  # or "gpt-3.5-turbo" for faster/cheaper queries
+  model: "gpt-5"  # SQLBot uses GPT-5 for advanced reasoning
   temperature: 0.1  # Low temperature for consistent, factual responses
-  max_tokens: 4000  # Adequate for most database queries and explanations
+  max_tokens: 50000  # High token limit for complex database analysis
   
 # Database Configuration  
 database:
@@ -26,6 +26,6 @@ project:
   description: "Example project demonstrating SQLBot with Sakila database"
   
 # You can override these settings with environment variables:
-# SQLBOT_LLM_MODEL=gpt-3.5-turbo
-# SQLBOT_READ_ONLY=false  
+# SQLBOT_LLM_MODEL=gpt-5
+# SQLBOT_READ_ONLY=false
 # SQLBOT_PROFILE=Sakila
