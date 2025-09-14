@@ -60,8 +60,8 @@ This command will:
 ### 3. Start SQLBot
 
 ```bash
-# Start SQLBot with the Sakila profile
-sqlbot --profile Sakila
+# Start SQLBot (profile is configured in .sqlbot/config.yml)
+sqlbot
 ```
 
 ### 4. Try Some Queries

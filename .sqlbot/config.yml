@@ -12,9 +12,8 @@ database:
   profile: "Sakila"  # dbt profile name to use
   
 # Safety Configuration
-safety:
-  read_only: true  # Enable safeguards against dangerous operations
-  preview_mode: false  # Set to true to preview SQL before execution
+dangerous: true  # Disable safeguards - allow dangerous operations
+preview_mode: false  # Set to true to preview SQL before execution
   
 # Query Configuration
 query:
@@ -28,5 +27,5 @@ project:
   
 # You can override these settings with environment variables:
 # SQLBOT_LLM_MODEL=gpt-5
-# SQLBOT_READ_ONLY=false
+# SQLBOT_DANGEROUS=true
 # SQLBOT_PROFILE=Sakila
