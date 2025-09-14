@@ -1,0 +1,31 @@
+# SQLBot Configuration for Sakila Example Project
+
+# LLM Configuration
+llm:
+  model: "gpt-4"  # or "gpt-3.5-turbo" for faster/cheaper queries
+  temperature: 0.1  # Low temperature for consistent, factual responses
+  max_tokens: 4000  # Adequate for most database queries and explanations
+  
+# Database Configuration  
+database:
+  profile: "Sakila"  # dbt profile name to use
+  
+# Safety Configuration
+safety:
+  read_only: true  # Enable safeguards against dangerous operations
+  preview_mode: false  # Set to true to preview SQL before execution
+  
+# Query Configuration
+query:
+  timeout: 60  # Query timeout in seconds
+  max_rows: 1000  # Maximum rows to return from queries
+  
+# Example project settings
+project:
+  name: "Sakila SQLite Example"
+  description: "Example project demonstrating SQLBot with Sakila database"
+  
+# You can override these settings with environment variables:
+# SQLBOT_LLM_MODEL=gpt-3.5-turbo
+# SQLBOT_READ_ONLY=false  
+# SQLBOT_PROFILE=Sakila
