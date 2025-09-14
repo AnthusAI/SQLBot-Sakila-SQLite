@@ -1,6 +1,8 @@
 # SQLBot Sakila SQLite Example
 
-This is an example project demonstrating how to use SQLBot with the Sakila sample database. The Sakila database is a well-known sample database containing DVD rental store data, perfect for learning and testing database queries.
+This is an example project demonstrating how to use **[SQLBot](https://github.com/AnthusAI/SQLBot)** with the Sakila sample database. The Sakila database is a well-known sample database containing DVD rental store data, perfect for learning and testing database queries.
+
+> **New to SQLBot?** Visit the [main SQLBot repository](https://github.com/AnthusAI/SQLBot) for full documentation, installation instructions, and advanced features.
 
 ## Purpose
 
@@ -240,6 +242,24 @@ sqlbot setup sakila
 # Or download manually
 sqlbot download sakila
 ```
+
+## About SQLBot
+
+SQLBot is an AI-powered database interface that lets you query your databases using natural language instead of writing SQL. Built on top of dbt and SQL, it provides:
+
+- 🗣️ **Natural Language Queries** - Ask questions in plain English
+- 🔒 **Built-in Safety** - Read-only mode and query safeguards
+- 🏗️ **dbt Integration** - Leverages your existing dbt models and profiles
+- 🤖 **AI Agents** - Custom agents with database-specific knowledge
+- 📊 **Rich Output** - Beautiful tables and data visualization
+
+**Example queries you can try:**
+- "How many films are in each category?"
+- "Which actors appear in the most films?"
+- "Show me customers from California"
+- "What are the top 5 most rented movies?"
+
+Learn more at **[github.com/AnthusAI/SQLBot](https://github.com/AnthusAI/SQLBot)**
 
 ## Contributing
 
