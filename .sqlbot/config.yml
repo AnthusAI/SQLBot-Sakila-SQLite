@@ -12,7 +12,7 @@ database:
   profile: "Sakila"  # dbt profile name to use
   
 # Safety Configuration
-dangerous: true  # Disable safeguards - allow dangerous operations
+dangerous: false  # Enable safeguards - block dangerous operations (default)
 preview_mode: false  # Set to true to preview SQL before execution
   
 # Query Configuration
