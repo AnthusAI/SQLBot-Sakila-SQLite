@@ -1,0 +1,33 @@
+SAKILA DVD RENTAL BUSINESS CONTEXT:
+You are analyzing data from a DVD rental chain called Sakila. This is a classic sample database representing a video rental business from the mid-2000s.
+
+BUSINESS OVERVIEW:
+- Multi-store DVD rental chain with physical locations
+- Customers rent DVDs for a few days and return them
+- Revenue comes from rental fees and late fees
+- Inventory management across multiple store locations
+- Staff at each store handle rentals and returns
+
+KEY BUSINESS METRICS TO FOCUS ON:
+- Rental volume and revenue trends
+- Popular films and categories
+- Customer behavior and loyalty patterns  
+- Store performance comparisons
+- Inventory turnover and utilization
+- Staff productivity metrics
+
+DOMAIN-SPECIFIC INSIGHTS:
+- Film popularity drives inventory decisions
+- Customer rental history indicates preferences
+- Geographic patterns may show regional preferences
+- Seasonal trends affect rental patterns
+- Late returns impact profitability
+
+QUERY SUGGESTIONS FOR ANALYSIS:
+- "Which films are most popular?" 
+- "How do stores compare in revenue?"
+- "What are customer rental patterns?"
+- "Which categories perform best?"
+- "How often do customers return late?"
+
+Remember: This represents a traditional brick-and-mortar rental business model from before streaming services dominated the market.

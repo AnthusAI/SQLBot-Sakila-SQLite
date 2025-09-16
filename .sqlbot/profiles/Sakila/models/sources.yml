@@ -1,0 +1,211 @@
+version: 2
+
+sources:
+  - name: sakila
+    description: "Sakila DVD rental database - sample database with film rental business data"
+    tables:
+      - name: actor
+        description: "Actors who appear in films"
+        columns:
+          - name: actor_id
+            description: "Primary key for actor"
+          - name: first_name
+            description: "Actor's first name"
+          - name: last_name
+            description: "Actor's last name"
+          - name: last_update
+            description: "Last update timestamp"
+
+      - name: film
+        description: "Films available for rental"
+        columns:
+          - name: film_id
+            description: "Primary key for film"
+          - name: title
+            description: "Film title"
+          - name: description
+            description: "Film description"
+          - name: release_year
+            description: "Year the film was released"
+          - name: language_id
+            description: "Foreign key to language table"
+          - name: rental_duration
+            description: "Rental duration in days"
+          - name: rental_rate
+            description: "Rental rate"
+          - name: length
+            description: "Film length in minutes"
+          - name: replacement_cost
+            description: "Cost to replace the film"
+          - name: rating
+            description: "Film rating (G, PG, PG-13, R, NC-17)"
+          - name: special_features
+            description: "Special features included with the film"
+
+      - name: customer
+        description: "Store customers"
+        columns:
+          - name: customer_id
+            description: "Primary key for customer"
+          - name: store_id
+            description: "Foreign key to store"
+          - name: first_name
+            description: "Customer's first name"
+          - name: last_name
+            description: "Customer's last name"
+          - name: email
+            description: "Customer's email address"
+          - name: address_id
+            description: "Foreign key to address"
+          - name: active
+            description: "Whether customer is active (1) or inactive (0)"
+          - name: create_date
+            description: "Date customer was created"
+
+      - name: rental
+        description: "Rental transactions"
+        columns:
+          - name: rental_id
+            description: "Primary key for rental"
+          - name: rental_date
+            description: "Date rental was made"
+          - name: inventory_id
+            description: "Foreign key to inventory"
+          - name: customer_id
+            description: "Foreign key to customer"
+          - name: return_date
+            description: "Date rental was returned"
+          - name: staff_id
+            description: "Foreign key to staff member who processed rental"
+
+      - name: payment
+        description: "Customer payments"
+        columns:
+          - name: payment_id
+            description: "Primary key for payment"
+          - name: customer_id
+            description: "Foreign key to customer"
+          - name: staff_id
+            description: "Foreign key to staff member who processed payment"
+          - name: rental_id
+            description: "Foreign key to rental"
+          - name: amount
+            description: "Payment amount"
+          - name: payment_date
+            description: "Date payment was made"
+
+      - name: inventory
+        description: "Film inventory"
+        columns:
+          - name: inventory_id
+            description: "Primary key for inventory"
+          - name: film_id
+            description: "Foreign key to film"
+          - name: store_id
+            description: "Foreign key to store"
+
+      - name: store
+        description: "Rental stores"
+        columns:
+          - name: store_id
+            description: "Primary key for store"
+          - name: manager_staff_id
+            description: "Foreign key to staff member who manages store"
+          - name: address_id
+            description: "Foreign key to store address"
+
+      - name: staff
+        description: "Store staff"
+        columns:
+          - name: staff_id
+            description: "Primary key for staff"
+          - name: first_name
+            description: "Staff member's first name"
+          - name: last_name
+            description: "Staff member's last name"
+          - name: address_id
+            description: "Foreign key to address"
+          - name: email
+            description: "Staff member's email"
+          - name: store_id
+            description: "Foreign key to store where staff member works"
+          - name: active
+            description: "Whether staff member is active"
+          - name: username
+            description: "Staff member's username"
+
+      - name: category
+        description: "Film categories"
+        columns:
+          - name: category_id
+            description: "Primary key for category"
+          - name: name
+            description: "Category name (Action, Comedy, Drama, etc.)"
+
+      - name: language
+        description: "Languages"
+        columns:
+          - name: language_id
+            description: "Primary key for language"
+          - name: name
+            description: "Language name"
+
+      - name: address
+        description: "Addresses for customers, staff, and stores"
+        columns:
+          - name: address_id
+            description: "Primary key for address"
+          - name: address
+            description: "Street address"
+          - name: district
+            description: "District/state"
+          - name: city_id
+            description: "Foreign key to city"
+          - name: postal_code
+            description: "Postal code"
+          - name: phone
+            description: "Phone number"
+
+      - name: city
+        description: "Cities"
+        columns:
+          - name: city_id
+            description: "Primary key for city"
+          - name: city
+            description: "City name"
+          - name: country_id
+            description: "Foreign key to country"
+
+      - name: country
+        description: "Countries"
+        columns:
+          - name: country_id
+            description: "Primary key for country"
+          - name: country
+            description: "Country name"
+
+      - name: film_actor
+        description: "Junction table linking films and actors"
+        columns:
+          - name: actor_id
+            description: "Foreign key to actor"
+          - name: film_id
+            description: "Foreign key to film"
+
+      - name: film_category
+        description: "Junction table linking films and categories"
+        columns:
+          - name: film_id
+            description: "Foreign key to film"
+          - name: category_id
+            description: "Foreign key to category"
+
+      # Views for easier querying
+      - name: film_list
+        description: "Convenient view of films with category and actors - pre-built view"
+
+      - name: customer_list
+        description: "Convenient view of customer information - pre-built view"
+
+      - name: actor_info
+        description: "Convenient view of actor information with films - pre-built view"

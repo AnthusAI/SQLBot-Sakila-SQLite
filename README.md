@@ -13,6 +13,104 @@ This project demonstrates the recommended approach for using SQLBot with your ow
 - **Customization**: Add your own database-specific agents and knowledge without modifying SQLBot itself
 - **Version Control**: Track your database queries, custom agents, and project-specific configuration separately
 
+## Progressive Enhancement Approach
+
+**SQLBot's key strength is its zero-barrier entry with unlimited customization potential.** You can start with just a dbt profile and immediately begin exploring any database, then progressively add sophistication as your needs grow.
+
+### Level 1: Minimal Setup (Just dbt profile)
+**What you need:** Only a dbt profile in `~/.dbt/profiles.yml` or `.dbt/profiles.yml`
+
+```yaml
+Sakila:
+  target: dev
+  outputs:
+    dev:
+      type: sqlite
+      path: ./profiles/Sakila/data/sakila.db
+```
+
+**What you get:**
+- ✅ **Immediate functionality** - Connect and explore any database
+- ✅ **Natural language queries** - "Show me the top 10 customers by rental count"
+- ✅ **Automatic schema discovery** - SQLBot detects tables and columns via dbt
+- ✅ **SQL assistance** - Convert natural language to proper SQL syntax
+
+**Perfect for:** New databases, exploration, proof-of-concept, getting started
+
+### Level 2: Schema Documentation (Optional)
+**What you add:** `profiles/YourProfile/models/schema.yml` with table/column descriptions
+
+```yaml
+sources:
+  - name: sakila
+    tables:
+      - name: film
+        description: "Films available for rental"
+        columns:
+          - name: title
+            description: "Film title"
+          - name: rental_rate
+            description: "Rental rate in dollars"
+```
+
+**Additional benefits:**
+- ✅ **Smarter queries** - Column descriptions improve LLM understanding
+- ✅ **Better suggestions** - More accurate field selection and joins
+- ✅ **Team knowledge** - Shared understanding of data meaning
+
+### Level 3: Custom Macros (Optional)
+**What you add:** `profiles/YourProfile/macros/` with reusable SQL logic
+
+```sql
+{% macro top_customers(limit=10) %}
+    SELECT c.customer_id, c.first_name, c.last_name, 
+           COUNT(r.rental_id) as rental_count
+    FROM {{ source('sakila', 'customer') }} c
+    JOIN {{ source('sakila', 'rental') }} r ON c.customer_id = r.customer_id
+    GROUP BY c.customer_id, c.first_name, c.last_name
+    ORDER BY rental_count DESC
+    LIMIT {{ limit }}
+{% endmacro %}
+```
+
+**Additional benefits:**
+- ✅ **Reusable logic** - Complex business calculations as simple calls
+- ✅ **Consistency** - Standardized metrics across team
+- ✅ **Efficiency** - "Show me top customers" → `{{ top_customers() }}`
+
+### Level 4: Domain System Prompt (Optional)
+**What you add:** `profiles/YourProfile/system_prompt.txt` with business context
+
+```
+SAKILA DVD RENTAL BUSINESS CONTEXT:
+You are analyzing data from a DVD rental chain called Sakila...
+
+KEY BUSINESS METRICS TO FOCUS ON:
+- Rental volume and revenue trends
+- Popular films and categories
+- Customer behavior and loyalty patterns
+```
+
+**Additional benefits:**
+- ✅ **Business intelligence** - Domain-aware analysis and suggestions
+- ✅ **Contextual queries** - Understands industry terminology and patterns
+- ✅ **Knowledge sharing** - Institutional knowledge codified and shareable
+- ✅ **Onboarding** - New team members get business context automatically
+
+### The Power of Progressive Enhancement
+
+**Start simple, grow sophisticated:**
+1. **Day 1**: Connect with just a dbt profile → immediate value
+2. **Week 1**: Add schema docs → better query accuracy  
+3. **Month 1**: Create macros → reusable business logic
+4. **Month 3**: Add domain prompt → business intelligence
+
+**This approach enables:**
+- **Zero friction adoption** - No upfront investment required
+- **Incremental value** - Each level adds meaningful capability
+- **Team collaboration** - Share database knowledge through version control
+- **Knowledge preservation** - Institutional knowledge survives team changes
+
 ## Project Structure
 
 ```
@@ -111,31 +209,48 @@ safety:
   preview_mode: false
 ```
 
-### Custom Agents
+### Domain System Prompts
 
-Add custom agents in `.sqlbot/agents/` to provide database-specific knowledge:
+Add domain-specific context through profile system prompts in `.sqlbot/profiles/{ProfileName}/system_prompt.txt`:
 
-```markdown
-# .sqlbot/agents/sakila_knowledge.md
-
-## Sakila Database Schema
-
-The Sakila database contains the following main entities:
-
-- **film**: Movie catalog with titles, descriptions, ratings
-- **actor**: Actor information and filmography
-- **customer**: Customer database with contact information  
-- **rental**: Rental transactions and history
-- **payment**: Payment records
-- **store**: Store locations and management
-- **staff**: Employee information
-
-## Common Queries
-
-When users ask about "popular movies", they typically want films with high rental counts.
-When users ask about "revenue", calculate from the payment table.
-The database uses a many-to-many relationship between films and actors via film_actor table.
 ```
+# .sqlbot/profiles/Sakila/system_prompt.txt
+
+SAKILA DVD RENTAL BUSINESS CONTEXT:
+You are analyzing data from a DVD rental chain called Sakila. This is a classic sample database 
+representing a video rental business from the mid-2000s.
+
+BUSINESS OVERVIEW:
+- Multi-store DVD rental chain with physical locations
+- Customers rent DVDs for a few days and return them
+- Revenue comes from rental fees and late fees
+- Inventory management across multiple store locations
+- Staff at each store handle rentals and returns
+
+KEY BUSINESS METRICS TO FOCUS ON:
+- Rental volume and revenue trends
+- Popular films and categories
+- Customer behavior and loyalty patterns
+- Store performance comparisons
+- Inventory turnover and utilization
+- Staff productivity metrics
+
+QUERY SUGGESTIONS FOR ANALYSIS:
+- "Which films are most popular?" 
+- "How do stores compare in revenue?"
+- "What are customer rental patterns?"
+- "Which categories perform best?"
+- "How often do customers return late?"
+
+Remember: This represents a traditional brick-and-mortar rental business model from before 
+streaming services dominated the market.
+```
+
+**Benefits:**
+- **Automatic integration** - Combined with base SQLBot system prompt
+- **Business intelligence** - LLM understands domain context and terminology
+- **Team knowledge sharing** - Institutional knowledge preserved in version control
+- **Zero setup required** - Works immediately if file exists, ignored if missing
 
 ## Using This as a Template
 

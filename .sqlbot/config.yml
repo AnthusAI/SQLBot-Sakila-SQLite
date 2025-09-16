@@ -5,9 +5,9 @@ llm:
   model: "gpt-5"  # SQLBot uses GPT-5 for advanced reasoning
   max_tokens: 50000  # High token limit for complex database analysis
   verbosity: "low"  # Response verbosity: low, medium, high
-  effort: "minimal"  # Processing effort: minimal, balanced, thorough
+  effort: "medium"  # Processing effort: low, medium, high
   
-# Database Configuration  
+# Database Configuration
 database:
   profile: "Sakila"  # dbt profile name to use
   
