@@ -25,6 +25,7 @@ classifiers = [
 
 dependencies = [
     "sqlbot>=1.1.0",
+    "dbt-sqlite>=1.6.0",
 ]
 
 [project.optional-dependencies]
